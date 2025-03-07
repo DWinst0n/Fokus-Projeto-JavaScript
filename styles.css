@@ -1,10 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 :root {
+    --font-primary: 'Unbounded', cursive;
+    --font-secundary: Montserrat;
     --color-primary: #123456;
     --color-secondary: #FFF;
     --azul-royal: #144480;
     --fundo-card-timer: rgba(20, 68, 128, 0.30);
-    --lils: #B872FF;
-    --linear-botes: linear-gradient(180deg, #B872FF 0%, #144480 100%);
+    --linear-botes: linear-gradient(180deg, var(--context-color) 0%, #144480 100%);
 }
 
 @keyframes gradientAnimation {
@@ -20,27 +24,30 @@
 }
 
 [data-contexto="foco"] {
-    --main-bg-color: linear-gradient(130deg, #8B1FF8 0%, #041832 48.44%, #01080E 100%);
-    background-size: 200% 200%;
-    animation: gradientAnimation 10s ease infinite;
+    --context-color: #8B1FF8;
+    --main-bg-color: linear-gradient(130deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
+    background-size: 400% 400%;
+    animation: gradientAnimation 30s ease infinite;
 }
 
 [data-contexto="descanso-curto"] {
-    --main-bg-color: linear-gradient(130deg, #0F725C 0%, #041832 48.44%, #01080E 100%);
-    background-size: 200% 200%;
-    animation: gradientAnimation 10s ease infinite;
+    --context-color: #0F725C;
+    --main-bg-color: linear-gradient(130deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
+    background-size: 400% 400%;
+    animation: gradientAnimation 30s ease infinite;
 }
 
 [data-contexto="descanso-longo"] {
-    --main-bg-color: linear-gradient(130deg, #1875E9 0%, #041832 48.44%, #01080E 100%);
-    background-size: 200% 200%;
-    animation: gradientAnimation 10s ease infinite;
+    --context-color: #1875E9;
+    --main-bg-color: linear-gradient(130deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
+    background-size: 400% 400%;
+    animation: gradientAnimation 30s ease infinite;
 }
 
 * {
     box-sizing: border-box;
     max-width: 100%;
-    transition: 0.5s;
+    transition: 1.5s;
     user-select: none;
 }
 
@@ -49,6 +56,8 @@ html {
     min-height: 100vh;
     font-size: 10px;
     transition: background 1.5s ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--context-color) var(--color-primary);
 }
 
 body {
@@ -58,8 +67,8 @@ body {
     background-repeat: no-repeat;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Unbounded', cursive;
+h1, h2, h3, h4, h5, h6, p {
+    font-family: var(--font-primary);
 }
 
 .app__logo-figure {
@@ -93,7 +102,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .app__section-card-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .app__card {
@@ -101,10 +112,10 @@ h1, h2, h3, h4, h5, h6 {
     border: 0.2rem solid var(--azul-royal);
     background: var(--fundo-card-timer);
     padding: 2.4rem;
-    margin: 8rem 0;
+    margin: 8rem 0 4rem 0;
     width: 59rem;
     max-width: 90%;
-    animation: cardPulse 4s ease-in-out infinite;
+    animation: cardPulse 3s ease-in-out infinite;
 }
 
 @keyframes cardPulse {
@@ -130,7 +141,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app__card-button {
-    font-family: Montserrat;
+    font-family: var(--font-secundary);
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 400;
@@ -164,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .app__card-list-label {
     color: var(--color-secondary);
-    font-family: Montserrat;
+    font-family: var(--font-secundary);
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 400;
@@ -207,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
 .app__footer-text {
     color: rgba(182, 182, 182, 0.8);
     text-align: center;
-    font-family: Montserrat;
+    font-family: var(--font-secundary);
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 400;
@@ -251,7 +262,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .toggle-checkbox:checked + .toggle-switch {
-    background: var(--lils);
+    background: var(--linear-botes);
 }
 
 .toggle-checkbox:checked + .toggle-switch:before {
@@ -261,6 +272,41 @@ h1, h2, h3, h4, h5, h6 {
 .toggle-checkbox {
     position: absolute;
     visibility: hidden;
+}
+.task-in-progress {
+    display: flex;
+    gap: 20vw;
+    color: var(--color-secondary);
+    font-family: var(--font-secundary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 150%; 
+}
+.task-in-progress span {
+    color: var(--Branco, #FFF);
+    font-family: var(--font-secundary);
+    font-size: 0.78125rem;
+    line-height: 150%;
+}
+.app__card-tasks__container {
+    border-top: 0.2rem solid var(--azul-royal);
+    padding: 2.4rem;
+    margin: 4rem 0 4rem 0;
+    width: 59rem;
+    max-width: 90%;
+}
+.tasks-title {
+    color: var(--color-secondary);
+    font-size: 1.625rem;
+    line-height: 120%;
+    display: flex;
+    justify-content: space-between;
+}
+.tasks-title span {
+    color: var(--context-color);
+}
+.tasks-title span:hover {
+    transform: scale(1.5);
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
