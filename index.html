@@ -11,9 +11,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
 </head>
 
@@ -67,13 +64,22 @@
                     </button>
                 </div>
             </div>
-        </section>
-        <section>
-
+            <div class="task-in-progress">
+                <span>#Em andamento</span>
+                <h4 id="tarefaNome">Nome da Tarefa em andamento</h4>
+            </div>
+            <div class="app__card-tasks__container">
+                <h3 class="tasks-title">Lista de tarefas: <span class="material-icons">delete</span></h3>
+                <ul class="tasks__list" id="listaTarefas">
+                    <li class="task__item">
+                        
+                    </li>
+                </ul>
+            </div>
         </section>
         <footer class="app__footer">
             <p class="app__footer-text">
-                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly. Desenvolvido por Davi Winston, estudante Alura. 
+                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly. Desenvolvido por Davi Winston, estudante Alura.
             </p>
         </footer>
     </main>

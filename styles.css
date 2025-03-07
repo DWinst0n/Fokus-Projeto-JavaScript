@@ -25,21 +25,21 @@
 
 [data-contexto="foco"] {
     --context-color: #8B1FF8;
-    --main-bg-color: linear-gradient(130deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
+    --main-bg-color: linear-gradient(260deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
     background-size: 400% 400%;
-    animation: gradientAnimation 30s ease infinite;
+    animation: gradientAnimation 15s ease infinite
 }
 
 [data-contexto="descanso-curto"] {
     --context-color: #0F725C;
-    --main-bg-color: linear-gradient(130deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
+    --main-bg-color: linear-gradient(260deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
     background-size: 400% 400%;
-    animation: gradientAnimation 30s ease infinite;
+    animation: gradientAnimation 20s ease infinite;
 }
 
 [data-contexto="descanso-longo"] {
     --context-color: #1875E9;
-    --main-bg-color: linear-gradient(130deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
+    --main-bg-color: linear-gradient(260deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
     background-size: 400% 400%;
     animation: gradientAnimation 30s ease infinite;
 }
