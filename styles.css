@@ -6,9 +6,14 @@
     --font-secundary: Montserrat;
     --color-primary: #123456;
     --color-secondary: #FFF;
+    --color-tertiary: #373737;
     --azul-royal: #144480;
     --fundo-card-timer: rgba(20, 68, 128, 0.30);
     --linear-botes: linear-gradient(180deg, var(--context-color) 0%, #144480 100%);
+    --deep: #01080E;
+    --fundo-card-task: rgba(152, 160, 168, 0.5);
+    --fundo-card-task2: rgba(255, 255, 255, 0.5);
+    --fundo-card-task-concluida: rgba(0, 244, 191, 0.40);
 }
 
 @keyframes gradientAnimation {
@@ -34,20 +39,20 @@
     --context-color: #0F725C;
     --main-bg-color: linear-gradient(260deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
     background-size: 400% 400%;
-    animation: gradientAnimation 20s ease infinite;
+    animation: gradientAnimation 15s ease infinite;
 }
 
 [data-contexto="descanso-longo"] {
     --context-color: #1875E9;
     --main-bg-color: linear-gradient(260deg, var(--context-color) 0%, #041832 48.44%, #01080E 100%);
     background-size: 400% 400%;
-    animation: gradientAnimation 30s ease infinite;
+    animation: gradientAnimation 15s ease infinite;
 }
 
 * {
     box-sizing: border-box;
     max-width: 100%;
-    transition: 1.5s;
+    transition: 0.5s;
     user-select: none;
 }
 
@@ -78,19 +83,20 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .app__section-banner-container {
-    width: 99rem;
+    width: 100vw;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 4rem;
     flex-wrap: wrap;
+    position: sticky;
+    top: 10rem;
+    z-index: -1; 
 }
 
 .app__title {
     line-height: 150%;
-    font-size: 5.2rem;
-    font-style: normal;
+    font-size: clamp(1rem, 3vw, 5.2rem);
     color: var(--color-secondary);
     font-weight: 200;
     max-width: 46rem;
@@ -99,6 +105,22 @@ h1, h2, h3, h4, h5, h6, p {
 .app__title-strong {
     font-weight: 600;
 }
+
+.app__image {
+    animation: opacity 15s ease infinite;
+}
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 .app__section-card-container {
     display: flex;
@@ -142,7 +164,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .app__card-button {
     font-family: var(--font-secundary);
-    font-size: 1.8rem;
+    font-size: clamp(1rem, 2vw, 2rem);
     font-style: normal;
     font-weight: 400;
     line-height: 150%;
@@ -205,7 +227,9 @@ h1, h2, h3, h4, h5, h6, p {
     background-size: 200% 200%;
     animation: gradientAnimation 5s ease infinite;
 }
-
+.app__card-primary-button:hover {
+    opacity: 0.5;
+}
 .app__footer {
     display: flex;
     width: 100%;
@@ -294,6 +318,9 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 4rem 0 4rem 0;
     width: 59rem;
     max-width: 90%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
 }
 .tasks-title {
     color: var(--color-secondary);
@@ -307,6 +334,137 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .tasks-title span:hover {
     transform: scale(1.5);
+}
+.task__item {
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    background: var(--fundo-card-task);
+    display: flex;
+    padding: 2rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkboxTask__container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.input-checkboxTask {
+    display: none;
+}
+.checkboxTask-customizado {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--color-secondary);
+    border: none;
+    cursor: pointer;
+    border-radius: 16rem;
+    position: relative;
+}
+.checkboxTask-customizado:after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    top: 10%;
+    width: 5px;
+    height: 8.5px;
+
+    border-top: 2px solid var(--deep);
+    border-left: 2px solid var(--deep);
+
+    transform: rotate(-140deg);
+}
+.task__name {
+    color: var(--deep);
+    font-family: var(--font-secundary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 150%;
+    white-space: nowrap;
+}
+.checkboxTask-customizado:hover~.task__name, .task__name:hover {
+    color: var(--cor-destaque);
+    cursor: pointer;
+}
+.btnAdd__task {
+    height: 4rem;
+    background: transparent;
+    color: var(--context-color);
+    border-radius: 2rem;
+    border: 2px solid var(--context-color);
+
+    font-family: var(--font-secundary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 150%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}
+.btnAdd__task:hover span {
+    transform: scale(1.5);
+}
+
+.add__task__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: var(--fundo-card-task);
+}
+.add__task__container h3 {
+    color: var(--deep);
+
+    font-family: var(--font-primary);
+    font-size: 1.625rem;
+    line-height: 120%;
+}
+.task__input {
+    height: 7.5rem;
+    padding: 1rem;
+    background: var(--fundo-card-task2);
+    border: none;
+    border-radius: 0.5rem;
+}
+.task__input::placeholder {
+    color: var(--color-tertiary);
+    font-family: var(--font-secundary);
+    font-size: 1.125rem;
+    line-height: 150%; 
+}
+.botoes__tasks__container {
+    display: flex;
+    justify-content: space-between;
+}
+.botoes__tasks__container div {
+    display: flex;
+    gap: 2rem;
+}
+.botoes__tasks__container button:hover span {
+ transform: scale(1.5);
+}
+.btn__delete, .btn__cancel, .btn__save {
+    display: flex;
+    height: 3.5rem;
+    padding: 1rem;
+    align-items: center;
+    gap: 0.25rem;
+    background: transparent;
+    border: none;
+    border-radius: 2rem;
+
+    color: var(--deep);
+    font-family: var(--font-secundary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 150%;
+}
+.btn__save {
+    background: var(--deep);
+    color: var(--color-secondary);
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
