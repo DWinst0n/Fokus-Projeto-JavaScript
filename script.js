@@ -5,8 +5,21 @@ let segundos;
 let isRunning = false;
 
 window.addEventListener("load", () => {document.querySelector("button").click();})
-const title = document.querySelector(".app__title");
+const banner = document.querySelector(".app__section-banner-container");
+const stopPoint = document.querySelector(".app__section-card-container").offsetTop - 425; 
 
+window.addEventListener("scroll", () => {
+    if (window.scrollY >= stopPoint) {
+        setTimeout(() => {
+            banner.style.transform = `translateY(-${window.scrollY - stopPoint}px)`;
+        }, 100)
+    } else {
+        banner.style.transform = "translateY(0)";
+    }
+});
+
+
+const title = document.querySelector(".app__title");
 botoesContexto.forEach(botao => {
     botao.addEventListener("click", () => {
         document.querySelector(".active")?.classList.remove("active");
@@ -40,12 +53,8 @@ botoesContexto.forEach(botao => {
                 break;
         }
     });
-    if (isRunning) {
-
-    } else {
-
-    }
 });
+
 let intervalId;
 const mainButton = document.getElementById("start-pause");
 const mainBtnTxt = document.querySelector(`.${mainButton.className} span`);
@@ -75,6 +84,9 @@ function startTimer() {
                 clearInterval(intervalId);
                 isRunning = false;
                 mainBtnTxt.textContent = "Começar";
+                const terminouSom = new Audio("sons/pause.mp3");
+                terminouSom.play();
+                botoesContexto.forEach(b => {b.style.display = "block";})
                 return;
             } else {
                 minutos--;
@@ -100,3 +112,112 @@ botaoMusica.addEventListener("click", () => {
         musica.pause();
     }
 })
+
+const tarefaNome =  document.getElementById("tarefaNome");
+const tasksList = document.getElementById("listaTarefas");
+const btnDeteleTasks = document.querySelector(".tasks-title span");
+const idsGerados = new Set();
+
+btnDeteleTasks.addEventListener("click", () => {
+    const confirmar = confirm("Realmente deseja apagar todos os itens da lista?");
+    if (confirmar) {
+        tasksList.innerHTML = "";
+        idsGerados.clear;
+        tarefaNome.textContent = "Nome da Tarefa em andamento";
+    }
+})
+
+const addTaskBtn = document.getElementById("btnAddTask");
+const addTaskCard = document.querySelector(".add__task__container");
+
+addTaskBtn.addEventListener("click", (e) => {
+    if (addTaskCard.classList.contains("invisivel")) {
+        addTaskCard.classList.remove("invisivel");
+        e.currentTarget.classList.add("invisivel");
+    }
+})
+
+const taskDescricao = document.getElementById("taskDescription");
+const botoesAddTask = document.querySelectorAll(".botoes__tasks__container button");
+
+botoesAddTask.forEach(botao => {
+    botao.addEventListener("click", (e) => {
+        let acao = e.target.className.split("__")[1];
+        switch (acao) {
+            case "delete":
+                taskDescricao.value = "";
+                break;
+            case "cancel":
+                taskDescricao.value = "";
+                addTaskCard.classList.add("invisivel");
+                addTaskBtn.classList.remove("invisivel");
+                break;
+            case "save":
+                if (taskDescricao.value.trim()) {
+                    const novaTarefa = criarItemLista(taskDescricao.value);
+                    tasksList.innerHTML += novaTarefa;
+                    accionarEventos();
+                    taskDescricao.value = "";
+                    addTaskCard.classList.add("invisivel");
+                    addTaskBtn.classList.remove("invisivel");
+                }
+                break;
+            default:
+                break;
+        }
+    })
+})
+
+function gerarId() {
+    let id;
+    do {
+        id = Math.floor(Math.random() * 1e3);
+    } while(idsGerados.has(id));
+    
+    idsGerados.add(id);
+    return id;
+}
+
+function criarItemLista(descricao) {
+    const id = gerarId();
+    return `<li class="task__item">
+        <div class="checkboxTask__container">
+            <input type="checkbox" class="input-checkboxTask invisivel" id="checkboxTask${id}">
+            <label for="checkboxTask${id}" class="checkboxTask-customizado"></label>
+            <p class="task__name">${descricao}</p>
+        </div>
+        <span class="material-icons task-delete">delete</span>
+    </li>`;
+}
+
+const listaItensTasks = document.getElementById("listaTarefas").children;
+function accionarEventos () {
+    document.querySelectorAll('.input-checkboxTask').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            let taskItem = e.target.parentElement.parentElement;
+            if (e.target.checked) {
+                taskItem.classList.add('checked2');
+                tarefaNome.textContent = "Nome da Tarefa em andamento"
+            } else {
+                taskItem.classList.remove('checked2');
+            }
+        });
+    });
+    document.querySelectorAll(".task__item span").forEach(deleteBtn => {
+        deleteBtn.addEventListener("click", (e) => {
+            let taskItem = e.target.parentElement;
+            if (!taskItem.classList.contains("checked2")) {
+                const confirmacao = confirm("Deseja excluir esta tarefa?");
+                if (confirmacao) taskItem.remove();
+            } else {taskItem.remove()}
+            if (listaItensTasks.length < 1) tarefaNome.textContent = "Nome da Tarefa em andamento";
+        })
+    })
+    const arrayItensTasks = Array.from(listaItensTasks);
+    arrayItensTasks.forEach(item => {
+        item.addEventListener("click", () => {
+            const tarefa = document.querySelector(`.${item.className} p`).textContent;
+            tarefaNome.textContent = tarefa;
+        })
+    })
+}
