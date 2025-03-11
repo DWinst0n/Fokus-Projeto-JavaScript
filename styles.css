@@ -63,6 +63,7 @@ html {
     transition: background 1.5s ease;
     scrollbar-width: thin;
     scrollbar-color: var(--context-color) var(--color-primary);
+    overflow-x: hidden;
 }
 
 body {
@@ -74,6 +75,9 @@ body {
 
 h1, h2, h3, h4, h5, h6, p {
     font-family: var(--font-primary);
+}
+.invisivel {
+    display: none;
 }
 
 .app__logo-figure {
@@ -299,6 +303,8 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .task-in-progress {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20vw;
     color: var(--color-secondary);
     font-family: var(--font-secundary);
@@ -307,7 +313,7 @@ h1, h2, h3, h4, h5, h6, p {
     line-height: 150%; 
 }
 .task-in-progress span {
-    color: var(--Branco, #FFF);
+    color: var(--color-secondary);
     font-family: var(--font-secundary);
     font-size: 0.78125rem;
     line-height: 150%;
@@ -319,7 +325,7 @@ h1, h2, h3, h4, h5, h6, p {
     width: 59rem;
     max-width: 90%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 1rem;
 }
 .tasks-title {
@@ -344,17 +350,29 @@ h1, h2, h3, h4, h5, h6, p {
     justify-content: space-between;
     align-items: center;
 }
+.task__item span:hover {
+    transform: scale(1.5);
+}
 .checkboxTask__container {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
-.input-checkboxTask {
-    display: none;
+.input-checkboxTask:checked~.checkboxTask-customizado {
+    background-color: var(--context-color);
 }
+.task__item.checked2 {
+    background: var(--linear-botes);
+}
+.checkboxTask-customizado:hover~.task__item, .task__item:hover {
+    background: var(--linear-botes);
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 .checkboxTask-customizado {
-    width: 1.5rem;
-    height: 1.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
     background-color: var(--color-secondary);
     border: none;
     cursor: pointer;
@@ -365,11 +383,11 @@ h1, h2, h3, h4, h5, h6, p {
     content: "";
     position: absolute;
     left: 25%;
-    top: 10%;
+    top: 15%;
     width: 5px;
-    height: 8.5px;
+    height: 10px;
 
-    border-top: 2px solid var(--deep);
+    border-top: 3px solid var(--deep);
     border-left: 2px solid var(--deep);
 
     transform: rotate(-140deg);
@@ -380,11 +398,7 @@ h1, h2, h3, h4, h5, h6, p {
     font-size: 1.125rem;
     font-weight: 600;
     line-height: 150%;
-    white-space: nowrap;
-}
-.checkboxTask-customizado:hover~.task__name, .task__name:hover {
-    color: var(--cor-destaque);
-    cursor: pointer;
+    white-space: wrap;
 }
 .btnAdd__task {
     height: 4rem;
@@ -404,7 +418,7 @@ h1, h2, h3, h4, h5, h6, p {
     gap: 0.625rem;
 }
 .btnAdd__task:hover span {
-    transform: scale(1.5);
+    transform: scale(1.3);
 }
 
 .add__task__container {
@@ -444,7 +458,7 @@ h1, h2, h3, h4, h5, h6, p {
     gap: 2rem;
 }
 .botoes__tasks__container button:hover span {
- transform: scale(1.5);
+ transform: scale(1.3);
 }
 .btn__delete, .btn__cancel, .btn__save {
     display: flex;
@@ -480,9 +494,20 @@ h1, h2, h3, h4, h5, h6, p {
 
     .app__title {
         font-size: 2.6rem;
+        text-align: center;
     }
 
     .app__card-timer {
         font-size: 6rem;
+    }
+    .task__item * {
+        margin: 0 0.5rem;
+    }
+}
+@media (max-width: 395px) {
+    .app__card-tasks__container {
+        max-width: 95vw;
+        padding: 0;
+        padding-top: 1rem;
     }
 }
