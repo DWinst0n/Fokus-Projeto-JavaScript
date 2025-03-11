@@ -76,9 +76,6 @@ body {
 h1, h2, h3, h4, h5, h6, p {
     font-family: var(--font-primary);
 }
-.invisivel {
-    display: none;
-}
 
 .app__logo-figure {
     display: flex;
@@ -479,6 +476,9 @@ h1, h2, h3, h4, h5, h6, p {
 .btn__save {
     background: var(--deep);
     color: var(--color-secondary);
+}
+.invisivel {
+    display: none;
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
