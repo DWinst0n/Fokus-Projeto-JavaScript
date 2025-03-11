@@ -69,8 +69,18 @@
                 <h4 id="tarefaNome">Nome da Tarefa em andamento</h4>
             </div>
             <div class="app__card-tasks__container">
-                <button class="btnAdd__task"><span class="material-icons">add_circle</span> Adicionar nova tarefa</button>
-                <div class="add__task__container">
+                <h3 class="tasks-title">Lista de tarefas: <span class="material-icons">delete</span></h3>
+                <ul class="tasks__list" id="listaTarefas">
+                    <li class="task__item">
+                        <div class="checkboxTask__container">
+                            <input type="checkbox" class="input-checkboxTask invisivel" id="checkboxTask">
+                            <label for="checkboxTask" class="checkboxTask-customizado"></label>
+                            <p class="task__name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora unde quia asperiores, quam ipsam quae iure sed porro accusamus adipisci fugiat dolore, molestias a recusandae odio sint repudiandae vitae veritatis.</p>
+                        </div>
+                        <span class="material-icons">delete</span>
+                    </li>
+                </ul>
+                <form class="add__task__container invisivel">
                     <h3>Adicionando tarefa</h3>
                     <input type="text" class="task__input" placeholder="No que você está trabalhando?">
                     <div class="botoes__tasks__container">
@@ -80,16 +90,8 @@
                             <button class="btn__save"><span class="material-icons">save</span>Salvar</button>
                         </div>
                     </div>
-                </div>
-                <ul class="tasks__list" id="listaTarefas">
-                    <li class="task__item">
-                        <label for="checkboxTask" class="checkboxTask__container">
-                            <div class="checkboxTask-customizado checkedTask" id="checkboxTask-customizado"><input type="checkboxTask" class="input-checkboxTask" id="checkboxTask"></div>
-                            <p class="task__name">Nome da tarefa que estou fazendo</p>
-                        </label>
-                    </li>
-                </ul>
-                <h3 class="tasks-title">Lista de tarefas: <span class="material-icons">delete</span></h3>
+                </form>
+                <button class="btnAdd__task" id="btnAddTask"><span class="material-icons">add_circle</span> Adicionar nova tarefa</button>
             </div>
         </section>
         <footer class="app__footer">
