@@ -3,14 +3,19 @@ const timer = document.getElementById("timer");
 let minutos;
 let segundos;
 let isRunning = false;
+let currentContextIndex = 0;
 
-window.addEventListener("load", () => {document.querySelector("button").click();})
+window.addEventListener("load", () => {
+    document.querySelector("button").click();
+    carregarTarefasDoLocalStorage();
+});
 
 const title = document.querySelector(".app__title");
-botoesContexto.forEach(botao => {
+botoesContexto.forEach((botao, index) => {
     botao.addEventListener("click", () => {
         document.querySelector(".active")?.classList.remove("active");
         botao.classList.add("active");
+        currentContextIndex = index;
 
         let btnTxt = botao.textContent.trim().toLowerCase().split(" ");
         let contexto = btnTxt.join("-");
@@ -74,6 +79,8 @@ function startTimer() {
                 const terminouSom = new Audio("sons/pause.mp3");
                 terminouSom.play();
                 botoesContexto.forEach(b => {b.style.display = "block";})
+                
+                autoAlternarProximoContexto();
                 return;
             } else {
                 minutos--;
@@ -84,6 +91,22 @@ function startTimer() {
         }
         timer.textContent = `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
     }, 1000);
+}
+
+function autoAlternarProximoContexto() {
+    let nextIndex;
+    
+    if (currentContextIndex === 0) {
+        nextIndex = 1;
+    } 
+    else if (currentContextIndex === 1) {
+        nextIndex = 0;
+    } 
+    else {
+        nextIndex = 0;
+    }
+    
+    botoesContexto[nextIndex].click();
 }
 
 const botaoMusica = document.getElementById("alternar-musica");
@@ -109,8 +132,9 @@ btnDeteleTasks.addEventListener("click", () => {
     const confirmar = confirm("Realmente deseja apagar todos os itens da lista?");
     if (confirmar) {
         tasksList.innerHTML = "";
-        idsGerados.clear;
+        idsGerados.clear();
         tarefaNome.textContent = "Nome da Tarefa em andamento";
+        salvarTarefasNoLocalStorage(); 
     }
 })
 
@@ -147,6 +171,7 @@ botoesAddTask.forEach(botao => {
                     taskDescricao.value = "";
                     addTaskCard.classList.add("invisivel");
                     addTaskBtn.classList.remove("invisivel");
+                    salvarTarefasNoLocalStorage(); 
                 }
                 break;
             default:
@@ -167,7 +192,7 @@ function gerarId() {
 
 function criarItemLista(descricao) {
     const id = gerarId();
-    return `<li class="task__item">
+    return `<li class="task__item" id="TaskID-${id}">
         <div class="checkboxTask__container">
             <input type="checkbox" class="input-checkboxTask invisivel" id="checkboxTask${id}">
             <label for="checkboxTask${id}" class="checkboxTask-customizado"></label>
@@ -178,16 +203,17 @@ function criarItemLista(descricao) {
 }
 
 const listaItensTasks = document.getElementById("listaTarefas").children;
-function accionarEventos () {
+function accionarEventos() {
     document.querySelectorAll('.input-checkboxTask').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             let taskItem = e.target.parentElement.parentElement;
             if (e.target.checked) {
                 taskItem.classList.add('checked2');
-                tarefaNome.textContent = "Nome da Tarefa em andamento"
+                tarefaNome.textContent = "Nome da Tarefa em andamento";
             } else {
                 taskItem.classList.remove('checked2');
             }
+            salvarTarefasNoLocalStorage();
         });
     });
     document.querySelectorAll(".task__item span").forEach(deleteBtn => {
@@ -195,16 +221,69 @@ function accionarEventos () {
             let taskItem = e.target.parentElement;
             if (!taskItem.classList.contains("checked2")) {
                 const confirmacao = confirm("Deseja excluir esta tarefa?");
-                if (confirmacao) taskItem.remove();
-            } else {taskItem.remove()}
+                if (confirmacao) {
+                    taskItem.remove();
+                    salvarTarefasNoLocalStorage();
+                }
+            } else {
+                taskItem.remove();
+                salvarTarefasNoLocalStorage();
+            }
             if (listaItensTasks.length < 1) tarefaNome.textContent = "Nome da Tarefa em andamento";
         })
     })
     const arrayItensTasks = Array.from(listaItensTasks);
     arrayItensTasks.forEach(item => {
         item.addEventListener("click", () => {
-            const tarefa = document.querySelector(`.${item.className} p`).textContent;
+            const tarefa = document.querySelector(`#${item.id} p`).textContent;
             tarefaNome.textContent = tarefa;
         })
     })
+}
+
+function salvarTarefasNoLocalStorage() {
+    const tarefas = [];
+    document.querySelectorAll('.task__item').forEach(taskItem => {
+        const id = taskItem.id;
+        const descricao = taskItem.querySelector('.task__name').textContent;
+        const concluida = taskItem.classList.contains('checked2');
+        const checkboxId = taskItem.querySelector('.input-checkboxTask').id;
+        
+        tarefas.push({
+            id: id,
+            descricao: descricao,
+            concluida: concluida,
+            checkboxId: checkboxId
+        });
+    });
+    
+    localStorage.setItem('fokusTarefas', JSON.stringify(tarefas));
+}
+
+function carregarTarefasDoLocalStorage() {
+    const tarefasSalvas = localStorage.getItem('fokusTarefas');
+    
+    if (tarefasSalvas) {
+        const tarefas = JSON.parse(tarefasSalvas);
+        
+        tasksList.innerHTML = "";
+        
+        tarefas.forEach(tarefa => {
+            const idNumero = tarefa.id.split('-')[1];
+            idsGerados.add(parseInt(idNumero));
+            
+            const tarefaHTML = `<li class="task__item${tarefa.concluida ? ' checked2' : ''}" id="${tarefa.id}">
+                <div class="checkboxTask__container">
+                    <input type="checkbox" class="input-checkboxTask invisivel" id="${tarefa.checkboxId}" ${tarefa.concluida ? 'checked' : ''}>
+                    <label for="${tarefa.checkboxId}" class="checkboxTask-customizado"></label>
+                    <p class="task__name">${tarefa.descricao}</p>
+                </div>
+                <span class="material-icons task-delete">delete</span>
+            </li>`;
+            
+            tasksList.innerHTML += tarefaHTML;
+        });
+        
+        accionarEventos();
+    }
 }
