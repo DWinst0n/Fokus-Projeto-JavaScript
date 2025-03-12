@@ -90,9 +90,6 @@ h1, h2, h3, h4, h5, h6, p {
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    position: sticky;
-    top: 10rem;
-    z-index: -1; 
 }
 
 .app__title {

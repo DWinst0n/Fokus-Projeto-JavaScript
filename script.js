@@ -5,19 +5,6 @@ let segundos;
 let isRunning = false;
 
 window.addEventListener("load", () => {document.querySelector("button").click();})
-const banner = document.querySelector(".app__section-banner-container");
-const stopPoint = document.querySelector(".app__section-card-container").offsetTop - 425; 
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY >= stopPoint) {
-        setTimeout(() => {
-            banner.style.transform = `translateY(-${window.scrollY - stopPoint}px)`;
-        }, 100)
-    } else {
-        banner.style.transform = "translateY(0)";
-    }
-});
-
 
 const title = document.querySelector(".app__title");
 botoesContexto.forEach(botao => {
