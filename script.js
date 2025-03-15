@@ -6,7 +6,7 @@ let isRunning = false;
 let currentContextIndex = 0;
 
 window.addEventListener("load", () => {
-    document.querySelector("button").click();
+    botoesContexto[0].click();
     carregarTarefasDoLocalStorage();
 });
 
@@ -97,15 +97,12 @@ function autoAlternarProximoContexto() {
     let nextIndex;
     
     if (currentContextIndex === 0) {
-        nextIndex = 1;
-    } 
-    else if (currentContextIndex === 1) {
-        nextIndex = 0;
-    } 
-    else {
+        nextIndex = Math.random() < 0.5 ? 1 : 2;
+    } else {
         nextIndex = 0;
     }
     
+    currentContextIndex = nextIndex;
     botoesContexto[nextIndex].click();
 }
 
