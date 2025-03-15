@@ -76,7 +76,7 @@ function startTimer() {
                 clearInterval(intervalId);
                 isRunning = false;
                 mainBtnTxt.textContent = "Começar";
-                const terminouSom = new Audio("sons/pause.mp3");
+                const terminouSom = new Audio("sons/beep.mp3");
                 terminouSom.play();
                 botoesContexto.forEach(b => {b.style.display = "block";})
                 
