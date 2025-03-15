@@ -50,6 +50,7 @@ botoesContexto.forEach((botao, index) => {
 let intervalId;
 const mainButton = document.getElementById("start-pause");
 const mainBtnTxt = document.querySelector(`.${mainButton.className} span`);
+const mainBtnImg = document.querySelector(`.${mainButton.className} img`);
 
 mainButton.addEventListener("click", () => {
     if (!isRunning) {
@@ -57,6 +58,7 @@ mainButton.addEventListener("click", () => {
         const playSom = new Audio("sons/play.wav");
         playSom.play();
         mainBtnTxt.textContent = "Pausar";
+        mainBtnImg.src = "imagens/pause.png";
         startTimer();
         botoesContexto.forEach(b => {b.style.display = "none";})
     } else {
@@ -64,6 +66,7 @@ mainButton.addEventListener("click", () => {
         const pauseSom = new Audio("sons/pause.mp3");
         pauseSom.play();
         mainBtnTxt.textContent = "Começar";
+        mainBtnImg.src = "imagens/play_arrow.png";
         clearInterval(intervalId);
         botoesContexto.forEach(b => {b.style.display = "block";})
     }
