@@ -2,7 +2,7 @@ import { accionarEventos } from './btnEvents.js';
 import { tasksList } from './tasks.js';
 
 export function salvarTarefasNoLocalStorage() {
-    /*const tarefas = [];
+    const tarefas = [];
     document.querySelectorAll('.task__item').forEach(taskItem => {
         const id = taskItem.id;
         const descricao = taskItem.querySelector('.task__name').textContent;
@@ -17,13 +17,13 @@ export function salvarTarefasNoLocalStorage() {
         });
     });
 
-    localStorage.setItem('fokusTarefas', JSON.stringify(tarefas));*/
+    localStorage.setItem('fokusTarefas', JSON.stringify(tarefas));
 
     
 }
 
 export function carregarTarefasDoLocalStorage() {
-    /*const tarefasSalvas = localStorage.getItem('fokusTarefas');
+    const tarefasSalvas = localStorage.getItem('fokusTarefas');
 
     if (tarefasSalvas) {
         const tarefas = JSON.parse(tarefasSalvas);
@@ -47,7 +47,7 @@ export function carregarTarefasDoLocalStorage() {
         });
 
         accionarEventos();
-    }*/
+    }
 
     
 }

@@ -1,4 +1,5 @@
 import { accionarEventos } from './btnEvents.js';
+import { salvarTarefasNoLocalStorage } from './crudScript.js';
 
 export const tarefaNome = document.getElementById("tarefaNome");
 export const tasksList = document.getElementById("listaTarefas");
