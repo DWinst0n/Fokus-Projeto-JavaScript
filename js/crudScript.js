@@ -1,5 +1,5 @@
 import { accionarEventos } from './btnEvents.js';
-import { tasksList } from './tasks.js';
+import { tasksList, idsGerados } from './tasks.js';
 
 export function salvarTarefasNoLocalStorage() {
     const tarefas = [];

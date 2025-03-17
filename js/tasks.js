@@ -6,6 +6,11 @@ export const tasksList = document.getElementById("listaTarefas");
 const btnDeteleTasks = document.querySelector(".tasks-title span");
 export const idsGerados = new Set();
 
+const addTaskBtn = document.getElementById("btnAddTask");
+const addTaskCard = document.querySelector(".add__task__container");
+const taskDescricao = document.getElementById("taskDescription");
+const botoesCardAddTask = document.querySelectorAll(".botoes__tasks__container button");
+
 export function initTasks() {
     btnDeteleTasks.addEventListener("click", () => {
         const confirmar = confirm("Realmente deseja apagar todos os itens da lista?");
@@ -16,10 +21,6 @@ export function initTasks() {
             salvarTarefasNoLocalStorage();
         }
     });
-
-    const addTaskBtn = document.getElementById("btnAddTask");
-    const addTaskCard = document.querySelector(".add__task__container");
-
     addTaskBtn.addEventListener("click", (e) => {
         if (addTaskCard.classList.contains("invisivel")) {
             addTaskCard.classList.remove("invisivel");
@@ -27,10 +28,13 @@ export function initTasks() {
         }
     });
 
-    const taskDescricao = document.getElementById("taskDescription");
-    const botoesAddTask = document.querySelectorAll(".botoes__tasks__container button");
+    taskDescricao.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            salvar(taskDescricao);
+        }
+    })
 
-    botoesAddTask.forEach(botao => {
+    botoesCardAddTask.forEach(botao => {
         botao.addEventListener("click", (e) => {
             let acao = e.target.className.split("__")[1];
             switch (acao) {
@@ -43,21 +47,25 @@ export function initTasks() {
                     addTaskBtn.classList.remove("invisivel");
                     break;
                 case "save":
-                    if (taskDescricao.value.trim()) {
-                        const novaTarefa = criarItemLista(taskDescricao.value);
-                        tasksList.innerHTML += novaTarefa;
-                        accionarEventos();
-                        taskDescricao.value = "";
-                        addTaskCard.classList.add("invisivel");
-                        addTaskBtn.classList.remove("invisivel");
-                        salvarTarefasNoLocalStorage();
-                    }
+                    salvar();
                     break;
                 default:
                     break;
             }
         });
     });
+}
+
+function salvar() {
+    if (taskDescricao.value.trim()) {
+        const novaTarefa = criarItemLista(taskDescricao.value);
+        tasksList.innerHTML += novaTarefa;
+        accionarEventos();
+        taskDescricao.value = "";
+        addTaskCard.classList.add("invisivel");
+        addTaskBtn.classList.remove("invisivel");
+        salvarTarefasNoLocalStorage();
+    }
 }
 
 function gerarId() {
