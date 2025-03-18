@@ -1,7 +1,7 @@
 import { accionarEventos } from './btnEvents.js';
 import { salvarTarefasNoLocalStorage } from './crudScript.js';
 
-export const tarefaNome = document.getElementById("tarefaNome");
+export const tarefaEmAndamento = document.getElementById("tarefaEmAndamento");
 export const tasksList = document.getElementById("listaTarefas");
 const btnDeteleAllTasks = document.querySelector(".tasks-title span");
 export const idsGerados = new Set();
@@ -17,7 +17,7 @@ export function initTasks() {
         if (confirmar) {
             tasksList.innerHTML = "";
             idsGerados.clear();
-            tarefaNome.textContent = "Nome da Tarefa em andamento";
+            tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
             salvarTarefasNoLocalStorage();
         }
     });
