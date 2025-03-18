@@ -1,4 +1,4 @@
-import { tarefaNome } from './tasks.js';
+import { tarefaEmAndamento } from './tasks.js';
 import { salvarTarefasNoLocalStorage } from './crudScript.js';
 
 const listaItensTasks = document.getElementById("listaTarefas").children;
@@ -9,7 +9,7 @@ export function accionarEventos() {
             let taskItem = e.target.parentElement.parentElement;
             if (e.target.checked) {
                 taskItem.classList.add('checked2');
-                tarefaNome.textContent = "Nome da Tarefa em andamento";
+                tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
             } else {
                 taskItem.classList.remove('checked2');
             }
@@ -29,14 +29,14 @@ export function accionarEventos() {
                 taskItem.remove();
                 salvarTarefasNoLocalStorage();
             }
-            if (listaItensTasks.length < 1) tarefaNome.textContent = "Nome da Tarefa em andamento";
+            if (listaItensTasks.length < 1) tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
         })
     })
     const arrayItensTasks = Array.from(listaItensTasks);
     arrayItensTasks.forEach(item => {
         item.addEventListener("click", () => {
-            const tarefa = document.querySelector(`#${item.id} p`).textContent;
-            tarefaNome.textContent = tarefa;
+            const tarefa = item.querySelector(`p`).textContent;
+            tarefaEmAndamento.textContent = tarefa;
         })
     })
 }
