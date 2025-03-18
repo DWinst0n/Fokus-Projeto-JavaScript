@@ -3,7 +3,7 @@ import { salvarTarefasNoLocalStorage } from './crudScript.js';
 
 export const tarefaNome = document.getElementById("tarefaNome");
 export const tasksList = document.getElementById("listaTarefas");
-const btnDeteleTasks = document.querySelector(".tasks-title span");
+const btnDeteleAllTasks = document.querySelector(".tasks-title span");
 export const idsGerados = new Set();
 
 const addTaskBtn = document.getElementById("btnAddTask");
@@ -12,7 +12,7 @@ const taskDescricao = document.getElementById("taskDescription");
 const botoesCardAddTask = document.querySelectorAll(".botoes__tasks__container button");
 
 export function initTasks() {
-    btnDeteleTasks.addEventListener("click", () => {
+    btnDeteleAllTasks.addEventListener("click", () => {
         const confirmar = confirm("Realmente deseja apagar todos os itens da lista?");
         if (confirmar) {
             tasksList.innerHTML = "";
@@ -30,7 +30,7 @@ export function initTasks() {
 
     taskDescricao.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-            salvar();
+            salvarTarefa();
         }
     })
 
@@ -47,7 +47,7 @@ export function initTasks() {
                     addTaskBtn.classList.remove("invisivel");
                     break;
                 case "save":
-                    salvar();
+                    salvarTarefa();
                     break;
                 default:
                     break;
@@ -56,7 +56,7 @@ export function initTasks() {
     });
 }
 
-function salvar() {
+function salvarTarefa() {
     if (taskDescricao.value.trim()) {
         const novaTarefa = criarItemLista(taskDescricao.value);
         tasksList.innerHTML += novaTarefa;
