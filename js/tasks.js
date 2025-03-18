@@ -30,7 +30,7 @@ export function initTasks() {
 
     taskDescricao.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-            salvar(taskDescricao);
+            salvar();
         }
     })
 
