@@ -16,20 +16,39 @@ export function accionarEventos() {
             salvarTarefasNoLocalStorage();
         });
     });
-    document.querySelectorAll(".task__item span").forEach(deleteBtn => {
-        deleteBtn.addEventListener("click", (e) => {
-            let taskItem = e.target.parentElement;
-            if (!taskItem.classList.contains("checked2")) {
-                const confirmacao = confirm("Deseja excluir esta tarefa?");
-                if (confirmacao) {
-                    taskItem.remove();
-                    salvarTarefasNoLocalStorage();
-                }
-            } else {
-                taskItem.remove();
-                salvarTarefasNoLocalStorage();
+    document.querySelectorAll(".task__item span").forEach(taskBtn => {
+        taskBtn.addEventListener("click", (e) => {
+            let taskItem = e.target.parentElement.parentElement;
+            switch (taskBtn.textContent) {
+                case 'delete':
+                    if (!taskItem.classList.contains("checked2")) {
+                        const confirmacao = confirm("Deseja excluir esta tarefa?");
+                        if (confirmacao) {
+                            taskItem.remove();
+                            salvarTarefasNoLocalStorage();
+                        }
+                    } else {
+                        taskItem.remove();
+                        salvarTarefasNoLocalStorage();
+                    }
+                    break;
+                case 'edit':
+                    const novaDescricaoTask = prompt("Editando o nome da tarefa");
+                    if(novaDescricaoTask && novaDescricaoTask.trim()){
+                        taskItem.querySelector("p").textContent = novaDescricaoTask;
+                        salvarTarefasNoLocalStorage();
+                    } else {return}
+                    break;
+                default:
+                    break;
             }
-            if (listaItensTasks.length < 1) tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
+            if (listaItensTasks.length < 1) {
+                setTimeout(() => {
+                    if (listaItensTasks.length < 1) {
+                        tarefaEmAndamento.textContent = "Nome da tarefa em andamento";
+                    }
+                }, 0);
+            }
         })
     })
     const arrayItensTasks = Array.from(listaItensTasks);

@@ -86,6 +86,9 @@ export function criarItemLista(descricao) {
             <label for="checkboxTask${id}" class="checkboxTask-customizado"></label>
             <p class="task__name">${descricao}</p>
         </div>
-        <span class="material-icons task-delete">delete</span>
+        <div class="task__buttons">
+            <span class="material-icons task-delete">delete</span>
+            <span class="material-icons task-edit">edit</span>
+        </div>
     </li>`;
 }

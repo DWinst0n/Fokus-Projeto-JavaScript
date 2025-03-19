@@ -40,7 +40,10 @@ export function carregarTarefasDoLocalStorage() {
                     <label for="${tarefa.checkboxId}" class="checkboxTask-customizado"></label>
                     <p class="task__name">${tarefa.descricao}</p>
                 </div>
-                <span class="material-icons task-delete">delete</span>
+                <div class="task__buttons">
+                    <span class="material-icons task-delete">delete</span>
+                    <span class="material-icons task-edit">edit</span>
+                </div>
             </li>`;
 
             tasksList.innerHTML += tarefaHTML;
