@@ -25,12 +25,11 @@ export function accionarEventos() {
                         const confirmacao = confirm("Deseja excluir esta tarefa?");
                         if (confirmacao) {
                             taskItem.remove();
-                            salvarTarefasNoLocalStorage();
                         }
                     } else {
                         taskItem.remove();
-                        salvarTarefasNoLocalStorage();
                     }
+                    salvarTarefasNoLocalStorage();
                     break;
                 case 'edit':
                     const novaDescricaoTask = prompt("Editando o nome da tarefa");
