@@ -479,6 +479,10 @@ img {
 .invisivel {
     display: none;
 }
+.task__buttons {
+    display: flex;
+    gap: 0.5rem;
+}
 
 @media (max-width: 1024px) and (min-width: 768px) {
     .app__section-banner-container {
