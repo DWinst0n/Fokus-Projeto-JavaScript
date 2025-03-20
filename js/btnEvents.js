@@ -57,14 +57,14 @@ export function accionarEventos() {
     arrayItensTasks.forEach(item => {
         item.addEventListener("click", () => {
             let iClass = item.classList;
+            let laterTask = document.querySelector(".working");
             if (iClass.contains("checked2")) return;
             if (iClass.contains("working")) {
                 tarefaEmAndamento.textContent = "Nome da tarefa em andamento";
                 iClass.toggle("working");
+                return;
             } else {
-                try {
-                    document.querySelector(".working").classList.toggle("working");
-                    } catch (error) {} 
+                if (laterTask) laterTask.classList.toggle("working")
                 iClass.toggle("working");
                 const tarefa = item.querySelector(`p`).textContent;
                 tarefaEmAndamento.textContent = tarefa;
