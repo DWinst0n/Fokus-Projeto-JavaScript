@@ -36,7 +36,7 @@ export function initTasks() {
 
     botoesCardAddTask.forEach(botao => {
         botao.addEventListener("click", (e) => {
-            let acao = e.target.className.split("__")[1];
+            let acao = e.currentTarget.className.split("__")[1];
             switch (acao) {
                 case "delete":
                     taskDescricao.value = "";
