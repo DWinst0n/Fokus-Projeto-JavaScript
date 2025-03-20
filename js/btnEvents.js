@@ -10,6 +10,9 @@ export function accionarEventos() {
             if (e.target.checked) {
                 taskItem.classList.add('checked2');
                 tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
+                if (taskItem.classList.contains("working")) {
+                    taskItem.classList.toggle("working");
+                }
             } else {
                 taskItem.classList.remove('checked2');
             }
@@ -53,8 +56,19 @@ export function accionarEventos() {
     const arrayItensTasks = Array.from(listaItensTasks);
     arrayItensTasks.forEach(item => {
         item.addEventListener("click", () => {
-            const tarefa = item.querySelector(`p`).textContent;
-            tarefaEmAndamento.textContent = tarefa;
+            let iClass = item.classList;
+            if (iClass.contains("checked2")) return;
+            if (iClass.contains("working")) {
+                tarefaEmAndamento.textContent = "Nome da tarefa em andamento";
+                iClass.toggle("working");
+            } else {
+                try {
+                    document.querySelector(".working").classList.toggle("working");
+                    } catch (error) {} 
+                iClass.toggle("working");
+                const tarefa = item.querySelector(`p`).textContent;
+                tarefaEmAndamento.textContent = tarefa;
+                }
         })
     })
 }

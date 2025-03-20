@@ -346,6 +346,10 @@ img {
     justify-content: space-between;
     align-items: center;
 }
+.task__item.working {
+    border: 2px solid var(--color-secondary);
+}
+
 .task__item span:hover {
     transform: scale(1.5);
 }
