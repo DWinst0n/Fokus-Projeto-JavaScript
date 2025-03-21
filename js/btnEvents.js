@@ -1,9 +1,35 @@
-import { tarefaEmAndamento } from './tasks.js';
+import { tarefaEmAndamento, tasksList, idsGerados } from './tasks.js';
 import { salvarTarefasNoLocalStorage } from './crudScript.js';
 
 const listaItensTasks = document.getElementById("listaTarefas").children;
+const btnDeleteTasksDone = document.getElementById("btn-remover-concluidas");
+const btndeleteAllTasks = document.getElementById("btn-remover-todas");
+const btnShowCardBtns = document.querySelector(".app_button-more");
 
 export function accionarEventos() {
+    btnShowCardBtns.addEventListener("mouseenter", () => { 
+        if (document.querySelectorAll(".checked2").length > 0) {
+            btnDeleteTasksDone.parentElement.style.display = "block";
+        } else {
+            btnDeleteTasksDone.parentElement.style.display = "none";
+        }
+    });
+    btndeleteAllTasks.addEventListener("click", () => {
+        const confirmar = confirm("Realmente deseja apagar todos os itens da lista?");
+        if (confirmar) {
+            tasksList.innerHTML = "";
+            idsGerados.clear();
+            tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
+            salvarTarefasNoLocalStorage();
+        }
+    });
+
+    btnDeleteTasksDone.addEventListener("click", () => {
+        const tarefasConcluidas = document.querySelectorAll(".checked2");
+        tarefasConcluidas.forEach(tarefa => tarefa.remove());
+        salvarTarefasNoLocalStorage();
+    })
+
     document.querySelectorAll('.input-checkboxTask').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             let taskItem = e.target.parentElement.parentElement;
@@ -19,6 +45,7 @@ export function accionarEventos() {
             salvarTarefasNoLocalStorage();
         });
     });
+
     document.querySelectorAll(".task__item span").forEach(taskBtn => {
         taskBtn.addEventListener("click", (e) => {
             let taskItem = e.target.parentElement.parentElement;
@@ -48,11 +75,13 @@ export function accionarEventos() {
                 setTimeout(() => {
                     if (listaItensTasks.length < 1) {
                         tarefaEmAndamento.textContent = "Nome da tarefa em andamento";
+                        idsGerados.clear();
                     }
                 }, 0);
             }
         })
     })
+
     const arrayItensTasks = Array.from(listaItensTasks);
     arrayItensTasks.forEach(item => {
         item.addEventListener("click", () => {

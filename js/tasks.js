@@ -3,7 +3,6 @@ import { salvarTarefasNoLocalStorage } from './crudScript.js';
 
 export const tarefaEmAndamento = document.getElementById("tarefaEmAndamento");
 export const tasksList = document.getElementById("listaTarefas");
-const btnDeteleAllTasks = document.querySelector(".tasks-title span");
 export const idsGerados = new Set();
 
 const addTaskBtn = document.getElementById("btnAddTask");
@@ -12,15 +11,6 @@ const taskDescricao = document.getElementById("taskDescription");
 const botoesCardAddTask = document.querySelectorAll(".botoes__tasks__container button");
 
 export function initTasks() {
-    btnDeteleAllTasks.addEventListener("click", () => {
-        const confirmar = confirm("Realmente deseja apagar todos os itens da lista?");
-        if (confirmar) {
-            tasksList.innerHTML = "";
-            idsGerados.clear();
-            tarefaEmAndamento.textContent = "Nome da Tarefa em andamento";
-            salvarTarefasNoLocalStorage();
-        }
-    });
     addTaskBtn.addEventListener("click", (e) => {
         if (addTaskCard.classList.contains("invisivel")) {
             addTaskCard.classList.remove("invisivel");
