@@ -311,6 +311,12 @@ img {
     font-size: 0.78125rem;
     line-height: 150%;
 }
+.task-in-progress h4 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    margin: 0 1rem;
+}
 .app__card-tasks__container {
     border-top: 0.2rem solid var(--azul-royal);
     padding: 2.4rem;
