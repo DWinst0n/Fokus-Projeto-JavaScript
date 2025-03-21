@@ -227,9 +227,6 @@ img {
     background-size: 200% 200%;
     animation: gradientAnimation 5s ease infinite;
 }
-.app__card-primary-button:hover {
-    opacity: 0.5;
-}
 .app__footer {
     display: flex;
     width: 100%;
@@ -334,9 +331,6 @@ img {
 .tasks-title span {
     color: var(--context-color);
 }
-.tasks-title span:hover {
-    transform: scale(1.5);
-}
 .task__item {
     margin: 1rem 0;
     border-radius: 0.5rem;
@@ -350,9 +344,6 @@ img {
     border: 2px solid var(--color-secondary);
 }
 
-.task__item span:hover {
-    transform: scale(1.5);
-}
 .checkboxTask__container {
     display: flex;
     gap: 0.5rem;
@@ -363,11 +354,6 @@ img {
 }
 .task__item.checked2 {
     background: var(--linear-botes);
-}
-.checkboxTask-customizado:hover~.task__item, .task__item:hover {
-    background: var(--linear-botes);
-    opacity: 0.5;
-    cursor: pointer;
 }
 
 .checkboxTask-customizado {
@@ -417,9 +403,6 @@ img {
     align-items: center;
     gap: 0.625rem;
 }
-.btnAdd__task:hover span {
-    transform: scale(1.3);
-}
 
 .add__task__container {
     display: flex;
@@ -457,9 +440,6 @@ img {
     display: flex;
     gap: 2rem;
 }
-.botoes__tasks__container button:hover span {
- transform: scale(1.3);
-}
 .btn__delete, .btn__cancel, .btn__save {
     display: flex;
     height: 3.5rem;
@@ -486,6 +466,64 @@ img {
 .task__buttons {
     display: flex;
     gap: 0.5rem;
+}
+
+/* Estilos para desktop (quando o dispositivo suporta hover) */
+@media (hover: hover) {
+    .app__card-primary-button:hover {
+        opacity: 0.5;
+    }
+
+    .tasks-title span:hover {
+        transform: scale(1.5);
+    }
+
+    .task__item span:hover {
+        transform: scale(1.5);
+    }
+
+    .checkboxTask-customizado:hover~.task__item, .task__item:hover {
+        background: var(--linear-botes);
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .btnAdd__task:hover span {
+        transform: scale(1.3);
+    }
+
+    .botoes__tasks__container button:hover span {
+        transform: scale(1.3);
+    }
+}
+
+/* Estilos para mobile (quando o hover não é suportado) */
+@media (hover: none) {
+    .app__card-primary-button:active {
+        opacity: 0.5;
+    }
+
+    .tasks-title span:active {
+        transform: scale(1.5);
+    }
+
+    .task__item span:active {
+        transform: scale(1.5);
+    }
+
+    .checkboxTask-customizado:active~.task__item, .task__item:active {
+        background: var(--linear-botes);
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .btnAdd__task:active span {
+        transform: scale(1.3);
+    }
+
+    .botoes__tasks__container button:active span {
+        transform: scale(1.3);
+    }
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
