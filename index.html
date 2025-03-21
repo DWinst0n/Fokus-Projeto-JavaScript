@@ -69,7 +69,28 @@
                 <h4 id="tarefaEmAndamento">Nome da Tarefa em andamento</h4>
             </div>
             <div class="app__card-tasks__container">
-                <h3 class="tasks-title">Lista de tarefas: <span class="material-icons">delete</span></h3>
+                <div class="app__card-tasks__header">
+                    <h3 class="tasks-title">Lista de tarefas: </h3> 
+                    <div class="app__card-tasks__actions">
+                        <button class="app_button-more">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <ul class="app__card__btns__lista">
+                            <li class="app__card__btn">
+                                <button id="btn-remover-concluidas">
+                                    <span class="material-icons">check</span>
+                                    Limpar tarefas concluídas
+                                </button>
+                            </li>
+                            <li class="app__card__btn">
+                                <button id="btn-remover-todas">
+                                    <span class="material-icons">delete</span>
+                                    Limpar todas as tarefas
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <ul class="tasks__list" id="listaTarefas"></ul>
                 <div class="add__task__container invisivel">
                     <h3>Adicionando tarefa</h3>
